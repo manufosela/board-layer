@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <title>board-layer demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script type="module" src="../board-layer.js"></script>
+    <style>
+      .blocks {
+        display:flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+      }
+      .block {
+        display:flex;
+        flex-direction:column;
+        flex-wrap: wrap;
+        white-space: normal;
+      }
+      .code {
+        padding: 20px;
+        color:#FFF; 
+        background: #000;
+      }
+      .attributes {
+        padding-left: 20px;
+      }
+      .botonera {
+        margin:20px;
+      }
+      #info {
+        margin:10px;
+      }
+      input, select, label, button {
+        margin-top:10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic board-layer Demo</h3>
+      <div class="blocks">
+        <board-layer id="board-layer" rows="10" cols="10"></board-layer>
+        <div class="blocks" style="width:50%;">
+          <div class="botonera">
+            <label for="x">X: </label><input id="x" type="number" min="1" max="10" />
+            <label for="y">Y: </label><input id="y" type="number" min="1" max="10" />
+            <label for="value">Valor: </label><input type="text" id="value" />
+            <br>
+            <label for="size">Size: </label><input type="text" id="size" />
+            <label for="orientation">Orientation: </label><select id="orientation"><option selected="true" value="horizontal">Horizontal</option><option value="vertical">Vertical</option></select>
+            <br/>
+            <button id="insert">Insert</button>
+            <button id="delete">Delete</button>
+          </div>
+          <div id="info"></div>        
+        </div>
+      </div>
+    </div>
+    <script>
+      function getFormData() {
+        const val = document.getElementById('value').value;
+        const x = document.getElementById('x').value;
+        const y = document.getElementById('y').value;
+        const size = document.getElementById('size').value;
+        const orientation = document.getElementById('orientation').value;
+        const detail = {id:'board-layer', content: val, posX: x, posY: y, size: size, orientation: orientation};
+        return detail;
+      }
+      window.onload = function() {
+        document.getElementById('insert').onclick = function(ev) {
+          detail = getFormData();
+          detail.command = 'insertElement';
+          const insertElementEvent = new CustomEvent('modify-cell-content', {detail: detail});
+          document.dispatchEvent(insertElementEvent);
+          document.getElementById('info').innerHTML = `Dispatch event "modify-cell-content" with detail: "{detail: ${JSON.stringify(detail)}}"`;
+        }
+        document.getElementById('delete').onclick = function(ev) {  
+          detail = getFormData();
+          detail.command = 'deleteElement';
+          detail.size = document.getElementById('size').value;
+          detail.orientation = document.getElementById('orientation').value;
+          const insertElementEvent = new CustomEvent('modify-cell-content', {detail: detail});
+          document.dispatchEvent(insertElementEvent);
+          document.getElementById('info').innerHTML = `Dispatch event "modify-cell-content" with detail: "{detail: ${JSON.stringify(detail)}}"`;
+        }
+      }
+    </script>
+  </body>
+</html>
