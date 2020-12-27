@@ -40,15 +40,15 @@ export class BoardLayer extends LitElement {
       /**
        * Width of the layer
        * @property
-       * @type { Number }
+       * @type { String }
        */
-      width: { type: Number },
+      width: { type: String },
       /**
        * Height of the layer
        * @property
-       * @type { Number }
+       * @type { String }
        */
-      height: { type: Number },
+      height: { type: String },
       /**
        * Select if paint border cell
        * @property
