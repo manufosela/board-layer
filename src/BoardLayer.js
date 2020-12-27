@@ -69,7 +69,7 @@ export class BoardLayer extends LitElement {
     this.cols = 10;
     this.width = '500px';
     this.height = '500px';
-    this.cells = [...Array(this.rows)].map(() => Array(this.cols).fill(''));
+    this.cells = null;
     this.childrenNodes = [];
     this.borderCell = true;
 
@@ -78,6 +78,7 @@ export class BoardLayer extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.cells = [...Array(this.rows)].map(() => Array(this.cols).fill(''));
     this.addEventListener('DOMSubtreeModified', this.getLightDomChildrenNodes);
     document.addEventListener('modify-cell-content', this.modifyCellCallback);
   }
