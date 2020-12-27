@@ -88,14 +88,20 @@ export class BoardLayer extends LitElement {
     this.getLightDomChildrenNodes();
   }
 
-  insertCellValue(x, y, valueToFill) {
-    this.shadowRoot.querySelector(`[data-col="${x}"][data-row="${y}"]`).innerHTML = valueToFill;
+  insertCellValue(x, y, cellValue) {
+    const cell = this.shadowRoot.querySelector(`[data-col="${x}"][data-row="${y}"]`);
+    if (typeof cellValue === 'object') {
+      cell.appendChild(cellValue);
+    } else {
+      cell.innerHTML = cellValue;
+    }
   }
 
   getLightDomChildrenNodes() {
     this.childrenNodes = [...this.querySelectorAll('[data-col][data-row]')];
     this.childrenNodes.forEach((childNode) => {
-      this.insertCellValue(childNode.dataset.col, childNode.dataset.row, childNode.innerHTML);
+      const childClone = childNode.cloneNode(true);
+      this.insertCellValue(childNode.dataset.col, childNode.dataset.row, childClone);
     });
   }
 
