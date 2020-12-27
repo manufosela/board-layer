@@ -22,6 +22,10 @@ export const BoardLayerStyles = css`
     justify-content: center;
   }
 
+  .board-layer div * {
+    border:0;
+  }
+
   .board-layer div.bordercell {
     border: 1px solid var(--border-color, var(--default-border-color));
   }
