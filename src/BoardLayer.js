@@ -91,6 +91,7 @@ export class BoardLayer extends LitElement {
   insertCellValue(x, y, cellValue) {
     const cell = this.shadowRoot.querySelector(`[data-col="${x}"][data-row="${y}"]`);
     if (typeof cellValue === 'object') {
+      cell.innerHTML = '';
       cell.appendChild(cellValue);
     } else {
       cell.innerHTML = cellValue;
