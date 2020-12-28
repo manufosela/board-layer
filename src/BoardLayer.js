@@ -54,7 +54,13 @@ export class BoardLayer extends LitElement {
        * @property
        * @type { Boolean }
        */
-      borderCell: { type: Boolean, attribute: 'border-cell' }
+      borderCell: { type: Boolean, attribute: 'border-cell' },
+      /**
+       * When 'log' is true show component log
+       * @property
+       * @type { Boolean }
+       */
+      log: { type: Boolean }
     };
   }
 
@@ -86,6 +92,12 @@ export class BoardLayer extends LitElement {
   updated(changed) {
     super.updated(changed);
     this.getLightDomChildrenNodes();
+  }
+
+  consoleLog() {
+    if (this.log) {
+      console.log.apply(this, arguments);
+    }
   }
 
   insertCellValue(x, y, cellValue) {
