@@ -5,7 +5,8 @@ export const BoardLayerStyles = css`
     display: block;
     margin: 1rem;
     --default-main-color: #ff7900;
-    --default-border-color: #CCC;
+    --default-cell-bg-color: #fff;
+    --default-cell-border-color: #CCC;
   }
   .board-layer {
     background-color: inherit;
@@ -20,6 +21,7 @@ export const BoardLayerStyles = css`
     display:flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--cell-bg-color, var(--default-cell-bg-color));
   }
 
   .board-layer div * {
@@ -27,6 +29,6 @@ export const BoardLayerStyles = css`
   }
 
   .board-layer div.bordercell {
-    border: 1px solid var(--border-color, var(--default-border-color));
+    border: 1px solid var(--cell-border-color, var(--default-cell-border-color));
   }
 `;
