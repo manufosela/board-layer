@@ -123,6 +123,7 @@ export class BoardLayer extends LitElement {
   }
 
   getLightDomChildrenNodes() {
+    [...this.shadowRoot.querySelectorAll('[data-col][data-row]')].forEach((cell) => { cell.innerHTML = ''; });
     this.childrenNodes = [...this.querySelectorAll('[data-col][data-row]')];
     this.childrenNodes.forEach((childNode) => {
       const childClone = childNode.cloneNode(true);
