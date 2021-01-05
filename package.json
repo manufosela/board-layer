@@ -1,7 +1,7 @@
 {
   "name": "board-layer",
   "description": "Lit-Element webcomponent board-layer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "board-layer.js",
   "repository": {
     "type": "git",

@@ -54,7 +54,19 @@ export class BoardLayer extends LitElement {
        * @property
        * @type { Boolean }
        */
-      borderCell: { type: Boolean, attribute: 'border-cell' },
+      borderCell: { 
+        type: Boolean, 
+        attribute: 'border-cell', 
+        converter: { 
+          fromAttribute: (value, type) => { 
+            return !(value==="false");
+          },
+          toAttribute: (value, type) => { 
+            // `value` is of type `type` 
+            return String(value);
+          }
+        }
+      },
       /**
        * When 'log' is true show component log
        * @property
